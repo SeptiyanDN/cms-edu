@@ -56,7 +56,7 @@ const FormCollapse = () => {
         main_image: formData.main_image.split(',')[1],
         body:content,
       };
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiQXNoOTJ0TzhRN0ZZTTFlNmVNbWNob25PNmVhcW1kN2hPdkZGOFpnUmZVNjdYU2kwN255bXFVV3p3QVgtQzRSb0o5U0NSUT09IiwidXNlcm5hbWUiOiJTZXB0aXlhbkROIiwiZXhwIjoxNjgyNTgxNzUwfQ.YhYbTixH6tl937_gmzjcP_5Jd8dFaOeKT1bDmUHl3xw'
+      const token ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiWmViQWFLZThFUllXcU5tOUd0OFpST2lidzZHRjFZMGhZTTVTSE5DQzVaUHNkakwycXdzMjhiVmJtRDFUVGN1Zm43RFVDZz09IiwidXNlcm5hbWUiOiJTZXB0aXlhbkROIiwiZXhwIjoxNjgyNjc3Mzk0fQ.IjpkHPlstHLzL69wjQAAMnZow2ZDy2MrUXkCk8DT4YI'
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
         updatedFormData,
