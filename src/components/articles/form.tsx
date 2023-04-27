@@ -46,11 +46,6 @@ const FormCollapse = () => {
 
   const editor = useRef(null);
 	const [content, setContent] = useState('');
-  const config = {
-    tabIndex:1,
-    readonly: false, 
-			placeholder: 'Start typings...'
-  }
 	
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -167,7 +162,6 @@ const FormCollapse = () => {
     </label>
     <JoditEditor
       value={content}
-      config={config}
 			onChange={newContent => setContent(newContent)}
 		/>
   
