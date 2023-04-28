@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
@@ -15,6 +16,7 @@ const FormCollapse = () => {
     main_image: "",
     body: "",
   });
+  const router = useRouter();
 
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -62,10 +64,10 @@ const FormCollapse = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
+        },
       );
-
-      console.log(response.data);
+      const { data } = response.data;
+      console.log(data)
     } catch (error) {
       console.error(error);
     }
@@ -74,7 +76,7 @@ const FormCollapse = () => {
   return (
     <div className="w-full min-w-full ">
       <button
-        className="bg-primary text-white px-2 py-1 rounded color mb-4 w-full"
+        className="bg-primary text-white px-2 py-1 rounded color mb-4 "
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         {isCollapsed ? "Cancel" : "Create New Article"}

@@ -3,8 +3,8 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import articlesReducer from './reducers/articles/articlesSlice';
 import articleReducer from './reducers/articles/article';
+import createArticleReducer from './reducers/articles/create';
 import articleByTagReducer from './reducers/articles/searchByTag'
-
 import trandingReducer from './reducers/articles/fetchTrending';
 import categoriesReducer from './reducers/category/categories'
 import thunkMiddleware from 'redux-thunk';
@@ -21,7 +21,9 @@ const persistedReducer = persistReducer(
     article: articleReducer,
     categories : categoriesReducer,
     tranding :trandingReducer,
-    articleByTag :articleByTagReducer
+    articleByTag :articleByTagReducer,
+  createArticle : createArticleReducer
+
 
   })
 );

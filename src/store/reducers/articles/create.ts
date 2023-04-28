@@ -3,56 +3,68 @@ import axios from "axios";
 import { AxiosResponse } from "axios";
 
 interface Article {
-  author_name: string;
   article_id: string;
   title: string;
-  body: string;
   description: string;
-  category_name: string;
-  created_at: string;
+  body: string;
+  slug: string;
+  category_id: string;
+  author_id: string;
   main_image: string;
   publised_at: string;
-  slug: string;
-  tag: string;
-  total: number;
+  created_at: string;
   updated_at: string;
+  status: number;
 }
 interface ApiResponse {
-  data: Article[];
+  data: Article;
   meta: {
     message: string;
     code: number;
     status: string;
   };
-  recordsTotal: number;
-  recordsFiltered: number;
-  last_page: number;
 }
 
 interface ArticlesState {
-  data: Article[];
+  data: Article;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ArticlesState = {
-  data: [],
+  data: {} as Article,
   loading: false,
   error: null,
 };
 
-
 export const createArticle = createAsyncThunk(
   "articles/createArticle",
-  async (args: { search: string; limit: number; sort: string }) => {
-    const { search, limit, sort } = args;
+  async (args: {
+    title: string;
+    description: string;
+    category_id: string;
+    main_image: string;
+    body: string;
+  }) => {
+    const { title, description, category_id,main_image,body } = args;
     const response: AxiosResponse<ApiResponse> = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/articles`
+      `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
+      {
+        title:title,
+        description : description,
+        category_id:category_id,
+        main_image:main_image,
+        body:body
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
     return response.data.data;
   }
 );
-
 
 export const create = createSlice({
   name: "articles",
@@ -65,7 +77,7 @@ export const create = createSlice({
       })
       .addCase(
         createArticle.fulfilled,
-        (state, action: PayloadAction<Article[]>) => {
+        (state, action: PayloadAction<Article>) => {
           state.loading = false;
           state.data = action.payload;
           state.error = null;
