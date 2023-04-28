@@ -111,7 +111,7 @@ const Sidebar = () => {
                             subIndex === menu.submenu.length - 1 ? "mb-3" : ""
                           } ${
                             router.pathname === subMenu.href
-                              ? "bg-gray-100 dark:bg-gray-700  text-gray-900 hover:text-gray-900"
+                              ? "bg-gray-100 dark:bg-gray-700  text-gray-900 hover:text-gray-900 mt-0.5"
                               : "text-white"
                           }`}
                         >

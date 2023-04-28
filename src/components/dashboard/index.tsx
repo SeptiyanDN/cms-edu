@@ -9,7 +9,7 @@ export default function Dashboard() {
   return (
     <>
     <div className="grid md:grid-cols-4 md:gap-4 md:mb-4">
-    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md">
+    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md mb-4 md:mb-2">
       <div className="flex items-center">
         <div className="ml-2 mr-4 text-primary">
           <FaRegNewspaper className='text-primary' size={25}/>
@@ -21,7 +21,7 @@ export default function Dashboard() {
       </div>
       <div className="ml-6 text-3xl mr-2 font-medium text-gray-900">20</div>
     </div>
-    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md">
+    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md mb-4 md:mb-2">
       <div className="flex items-center">
         <div className="ml-2 mr-4 text-primary">
           <BiCategoryAlt size={25}/>
@@ -33,7 +33,7 @@ export default function Dashboard() {
       </div>
       <div className="ml-6 text-3xl mr-2 font-medium text-gray-900">20</div>
     </div>
-    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md">
+    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md mb-4 md:mb-2">
       <div className="flex items-center">
         <div className="ml-2 mr-4 ">
           <TfiComments className='text-primary' size={25}/>
@@ -45,7 +45,7 @@ export default function Dashboard() {
       </div>
       <div className="ml-6 text-3xl mr-2 font-medium text-gray-900">20</div>
     </div>
-    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md">
+    <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md mb-4 md:mb-2">
       <div className="flex items-center">
         <div className="ml-2 mr-4 text-primary">
           <TbUsers size={25}/>
