@@ -51,6 +51,17 @@ export const fetchArticles = createAsyncThunk(
     return response.data.data;
   }
 );
+export const createArticle = createAsyncThunk(
+  "articles/createArticle",
+  async (args: { search: string; limit: number; sort: string }) => {
+    const { search, limit, sort } = args;
+    const response: AxiosResponse<ApiResponse> = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/articles`
+    );
+    return response.data.data;
+  }
+);
+
 
 export const articlesSlice = createSlice({
   name: "articles",

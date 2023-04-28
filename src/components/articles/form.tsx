@@ -55,8 +55,8 @@ const FormCollapse = () => {
         main_image: formData.main_image.split(",")[1],
         body: content,
       };
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiWmViQWFLZThFUllXcU5tOUd0OFpST2lidzZHRjFZMGhZTTVTSE5DQzVaUHNkakwycXdzMjhiVmJtRDFUVGN1Zm43RFVDZz09IiwidXNlcm5hbWUiOiJTZXB0aXlhbkROIiwiZXhwIjoxNjgyNjc3Mzk0fQ.IjpkHPlstHLzL69wjQAAMnZow2ZDy2MrUXkCk8DT4YI";
+      const token = localStorage.getItem("token");
+      console.log(token) // ambil token dari localStorage
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/articles`,
         updatedFormData,
