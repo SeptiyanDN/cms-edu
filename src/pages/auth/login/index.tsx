@@ -17,11 +17,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
         {
           username: username,
           password: password,
-        }
+        },
       );
       const { data } = response.data;
 
@@ -125,7 +125,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-md"
+                className="bg-primary hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-md"
               >
                 Sign In
               </button>
