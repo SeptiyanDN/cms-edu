@@ -48,11 +48,13 @@ const Login = () => {
         <title>Login | My App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen flex justify-center">
-        <div className="w-2/3 hidden md:flex bg-primary">image</div>
+      <div className="min-h-screen flex justify-center ">
+        <div className="w-2/3 hidden md:flex ">
+          <Image src="https://is3.cloudhost.id/kedaiedukasi/assets/image/login.avif" width={5000} height={5000} alt="testing" className="object-cover border-primary  border-r-2 rounded-e-3xl"/>
+        </div>
         <div className="md:w-1/3 flex justify-center  items-center">
           <div className="md:max-w-md   w-full px-6 py-8 bg-white shadow-2xl shadow-primary rounded-3xl justify-center">
-            <div className="justify-center">
+            <div className="justify-center flex">
               <Link href="/" className="flex items-center pl-2.5 mb-5">
                 <Image
                   src="https://flowbite.com/docs/images/logo.svg"
@@ -118,7 +120,7 @@ const Login = () => {
                 />
                 <label
                   htmlFor="rememberMe"
-                  className="text-gray-700 font-medium"
+                  className="text-gray-700 font-poppins font-medium"
                 >
                   Remember me
                 </label>
@@ -130,17 +132,17 @@ const Login = () => {
                 Sign In
               </button>
             </form>
-            <div className="mt-6 text-sm text-gray-600">
+            <div className="mt-6 text-sm text-gray-600 justify-center items-center flex">
               <Link
                 href="/forgot-password"
-                className="text-indigo-500 hover:text-indigo-600"
+                className="text-indigo-500 hover:text-indigo-600 font-poppins"
               >
                 Forgot password?
               </Link>
               <span className="mx-2">·</span>
               <Link
                 href="/register"
-                className="text-indigo-500 hover:text-indigo-600"
+                className="text-indigo-500 font-poppins hover:text-indigo-600"
               >
                 Create an account
               </Link>
