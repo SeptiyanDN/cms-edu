@@ -58,7 +58,7 @@ const FormCollapse = () => {
       const token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiWmViQWFLZThFUllXcU5tOUd0OFpST2lidzZHRjFZMGhZTTVTSE5DQzVaUHNkakwycXdzMjhiVmJtRDFUVGN1Zm43RFVDZz09IiwidXNlcm5hbWUiOiJTZXB0aXlhbkROIiwiZXhwIjoxNjgyNjc3Mzk0fQ.IjpkHPlstHLzL69wjQAAMnZow2ZDy2MrUXkCk8DT4YI";
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles`,
         updatedFormData,
         {
           headers: {
@@ -76,21 +76,20 @@ const FormCollapse = () => {
   return (
     <div className="w-full min-w-full ">
       <button
-        className="bg-primary text-white px-2 py-1 rounded color mb-4"
+        className="bg-primary text-white px-2 py-1 rounded color mb-4 w-full"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         {isCollapsed ? "Cancel" : "Create New Article"}
       </button>
       <div
         className={`${
-          isCollapsed ? "block" : "hidden"
+          isCollapsed ? "" : "hidden"
         } bg-white shadow-md rounded-2xl md:px-8 px-2 `}
       >
-        <div className="p-4">
           <form onSubmit={handleSubmit} className="">
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 font-bold mb-2"
+
+       <label
+                className="block text-gray-700 font-bold mb-2 pt-2"
                 htmlFor="title"
               >
                 Title
@@ -104,10 +103,8 @@ const FormCollapse = () => {
                 onChange={handleFormChange}
                 required
               />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 font-bold mb-2"
+               <label
+                className="block text-gray-700 font-bold mb-2 pt-2"
                 htmlFor="description"
               >
                 Description
@@ -120,9 +117,7 @@ const FormCollapse = () => {
                 onChange={handleFormChange}
                 required
               ></textarea>
-            </div>
-            <div className="mb-4">
-              <label
+               <label
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="category_id"
               >
@@ -141,10 +136,8 @@ const FormCollapse = () => {
                 <option value="2">Category 2</option>
                 <option value="3">Category 3</option>
               </select>
-            </div>
-            <div className="mb-4">
               <label
-                className="block text-gray-700 font-bold mb-2"
+                className="block text-gray-700 font-bold mb-2 pt-2"
                 htmlFor="main_image"
               >
                 Main Image
@@ -155,10 +148,8 @@ const FormCollapse = () => {
                 id="main_image"
                 onChange={handleImageChange}
               />
-            </div>
-            <div className="mb-4">
               <label
-                className="block text-gray-700 font-bold mb-2"
+                className="block text-gray-700 font-bold mb-2 pt-2"
                 htmlFor="body"
               >
                 Body
@@ -167,20 +158,21 @@ const FormCollapse = () => {
                 value={content}
                 onChange={(newContent) => setContent(newContent)}
               />
-            </div>
-            <div className="flex items-center justify-between">
+            
+            <div className="flex items-center justify-between pb-4 pt-2">
               <button
-                className=" ml-auto bg-primary  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className=" ml-auto bg-primary  text-white font-mono text-xs py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Submit
               </button>
             </div>
           </form>
-        </div>
       </div>
     </div>
   );
 };
 
 export default FormCollapse;
+
+
