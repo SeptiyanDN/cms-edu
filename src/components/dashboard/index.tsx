@@ -8,7 +8,7 @@ import { TfiComments } from "react-icons/tfi";
 export default function Dashboard() {
   return (
     <>
-    <div className="grid grid-cols-4 gap-4 mb-4">
+    <div className="grid md:grid-cols-4 md:gap-4 md:mb-4">
     <div className="flex items-center justify-between p-4 bg-white shadow-lg rounded-md">
       <div className="flex items-center">
         <div className="ml-2 mr-4 text-primary">

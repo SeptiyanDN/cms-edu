@@ -1,21 +1,21 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { AxiosResponse } from 'axios';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
+import { AxiosResponse } from "axios";
 
 interface Article {
   author_name: string;
   article_id: string;
   title: string;
   body: string;
-  description:string
-  category_name : string
-  created_at: string
-  main_image:string
-  publised_at:string
-  slug:string
-  tag:string
-  total:number
-  updated_at:string
+  description: string;
+  category_name: string;
+  created_at: string;
+  main_image: string;
+  publised_at: string;
+  slug: string;
+  tag: string;
+  total: number;
+  updated_at: string;
 }
 interface ApiResponse {
   data: Article[];
@@ -42,9 +42,9 @@ const initialState: ArticlesState = {
 };
 
 export const fetchArticles = createAsyncThunk(
-  'articles/fetchArticles',
-  async (args: { search: string; limit: number, sort:string }) => {
-    const { search, limit,sort } = args;
+  "articles/fetchArticles",
+  async (args: { search: string; limit: number; sort: string }) => {
+    const { search, limit, sort } = args;
     const response: AxiosResponse<ApiResponse> = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/list?offset=1&limit=${limit}&search=${search}&order_direction=${sort}&order_column=title`
     );
@@ -53,7 +53,7 @@ export const fetchArticles = createAsyncThunk(
 );
 
 export const articlesSlice = createSlice({
-  name: 'articles',
+  name: "articles",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -61,14 +61,17 @@ export const articlesSlice = createSlice({
       .addCase(fetchArticles.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchArticles.fulfilled, (state, action: PayloadAction<Article[]>) => {
-        state.loading = false;
-        state.data = action.payload;
-        state.error = null;
-      })
+      .addCase(
+        fetchArticles.fulfilled,
+        (state, action: PayloadAction<Article[]>) => {
+          state.loading = false;
+          state.data = action.payload;
+          state.error = null;
+        }
+      )
       .addCase(fetchArticles.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? 'Error fetching articles';
+        state.error = action.error.message ?? "Error fetching articles";
       });
   },
 });
