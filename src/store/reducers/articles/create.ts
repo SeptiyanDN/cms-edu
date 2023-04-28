@@ -41,50 +41,41 @@ const initialState: ArticlesState = {
   error: null,
 };
 
-export const fetchArticles = createAsyncThunk(
-  "articles/fetchArticles",
-  async (args: { search: string; limit: number; sort: string }) => {
-    const { search, limit, sort } = args;
-    const response: AxiosResponse<ApiResponse> = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/articles/list?offset=1&limit=${limit}&search=${search}&order_direction=${sort}&order_column=title`
-    );
-    return response.data.data;
-  }
-);
+
 export const createArticle = createAsyncThunk(
   "articles/createArticle",
   async (args: { search: string; limit: number; sort: string }) => {
     const { search, limit, sort } = args;
     const response: AxiosResponse<ApiResponse> = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/articles/`
+      `${process.env.NEXT_PUBLIC_API_URL}/articles`
     );
     return response.data.data;
   }
 );
 
 
-export const articlesSlice = createSlice({
+export const create = createSlice({
   name: "articles",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchArticles.pending, (state) => {
+      .addCase(createArticle.pending, (state) => {
         state.loading = true;
       })
       .addCase(
-        fetchArticles.fulfilled,
+        createArticle.fulfilled,
         (state, action: PayloadAction<Article[]>) => {
           state.loading = false;
           state.data = action.payload;
           state.error = null;
         }
       )
-      .addCase(fetchArticles.rejected, (state, action) => {
+      .addCase(createArticle.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message ?? "Error fetching articles";
       });
   },
 });
 
-export default articlesSlice.reducer;
+export default create.reducer;

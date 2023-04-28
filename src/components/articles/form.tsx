@@ -55,14 +55,12 @@ const FormCollapse = () => {
         main_image: formData.main_image.split(",")[1],
         body: content,
       };
-      const token = localStorage.getItem("token");
-      console.log(token) // ambil token dari localStorage
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
         updatedFormData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
