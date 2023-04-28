@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
         {
           username: username,
           password: password,
