@@ -19,14 +19,14 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build the Docker image
-        run: docker build -t kedaiprogrammer/cmsedu:latest .
+        run: docker build -t kedaiprogrammer/cms:latest .
 
       - name: Push Docker image to Docker Hub
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: kedaiprogrammer/cmsedu:latest
+          tags: kedaiprogrammer/cms:latest
 
       - name: SSH into VPS
         uses: appleboy/ssh-action@v0.1.6
@@ -35,9 +35,9 @@ jobs:
           username: kedaiprogrammer
           password: Sukses@2023
           script: |
-            docker stop cmsedu || true
-            docker rm cmsedu || true
+            docker stop cms || true
+            docker rm cms || true
             docker images || true
             docker rmi $(docker images -q) || true
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/cmsedu:latest
-            docker run -d -p 3501:3501 --name cmsedu kedaiprogrammer/cmsedu:latest
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/cms:latest
+            docker run -d -p 3501:3501 --name cms kedaiprogrammer/cms:latest
