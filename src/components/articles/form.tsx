@@ -1,13 +1,30 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { fetchCategories } from "@/store/reducers/category/categories";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "@/store";
+import { AnyAction } from "redux";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
 });
 
 const FormCollapse = () => {
+
+
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
+  const { data: categories} = useSelector((state: RootState) => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -58,11 +75,12 @@ const FormCollapse = () => {
         body: content,
       };
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles`,
         updatedFormData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_PUBLIC_URL}`, // ganti dengan domain Anda
           },
         },
       );
@@ -132,9 +150,10 @@ const FormCollapse = () => {
                 required
               >
                 <option value="">-- Choose a category --</option>
-                <option value="1">Category 1</option>
-                <option value="2">Category 2</option>
-                <option value="3">Category 3</option>
+                {categories.map((category)=> (
+                  <option key={category.category_id} value={category.category_id}>{category.tag}</option>
+                  ))}
+                
               </select>
               <label
                 className="block text-gray-700 font-bold mb-2 pt-2"
