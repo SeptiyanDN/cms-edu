@@ -75,7 +75,7 @@ const FormCollapse = () => {
         body: content,
       };
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles`,
+        `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
         updatedFormData,
         {
           headers: {
