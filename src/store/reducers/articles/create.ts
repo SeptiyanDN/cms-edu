@@ -11,11 +11,12 @@ interface Article {
   category_id: string;
   author_id: string;
   main_image: string;
-  publised_at: string;
+  published_at: string;
   created_at: string;
   updated_at: string;
   status: number;
 }
+
 interface ApiResponse {
   data: Article;
   meta: {
@@ -26,13 +27,13 @@ interface ApiResponse {
 }
 
 interface ArticlesState {
-  data: Article;
+  data: Article | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ArticlesState = {
-  data: {} as Article,
+  data: null,
   loading: false,
   error: null,
 };
@@ -46,15 +47,15 @@ export const createArticle = createAsyncThunk(
     main_image: string;
     body: string;
   }) => {
-    const { title, description, category_id,main_image,body } = args;
+    const { title, description, category_id, main_image, body } = args;
     const response: AxiosResponse<ApiResponse> = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
       {
-        title:title,
-        description : description,
-        category_id:category_id,
-        main_image:main_image,
-        body:body
+        title,
+        description,
+        category_id,
+        main_image,
+        body,
       },
       {
         headers: {
@@ -74,18 +75,18 @@ export const create = createSlice({
     builder
       .addCase(createArticle.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(
         createArticle.fulfilled,
         (state, action: PayloadAction<Article>) => {
           state.loading = false;
           state.data = action.payload;
-          state.error = null;
         }
       )
       .addCase(createArticle.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? "Error fetching articles";
+        state.error = action.error.message ?? "Error creating article";
       });
   },
 });
