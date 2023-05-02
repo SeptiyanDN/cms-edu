@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { fetchCategories } from "@/store/reducers/category/categories";
@@ -24,6 +23,8 @@ const FormCollapse = () => {
   }, [dispatch]);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const [success, setSuccess] = useState("")
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -70,9 +71,10 @@ const FormCollapse = () => {
         main_image: formData.main_image.split(",")[1],
         body: content,
       };
-      const create = createArticle(updatedFormData);
-      console.log(create)
-      router.push("/");
+      createArticle(updatedFormData);
+      setIsCollapsed(false)
+      setSuccess("Berhasil Menambahkan Data")
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -81,11 +83,16 @@ const FormCollapse = () => {
   return (
     <div className="w-full min-w-full ">
       <button
-        className="bg-primary text-white px-2 py-1 rounded color mb-4 "
+        className="bg-primary text-white px-2 py-1 rounded-md color mb-4 "
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         {isCollapsed ? "Cancel" : "Create New Article"}
       </button>
+      {success && (
+              <div className="bg-yellow-500  border rounded-md p-4 mb-4 text-white">
+                {success}
+              </div>
+            )}
       <div
         className={`${
           isCollapsed ? "" : "hidden"
